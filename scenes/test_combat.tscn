@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://syov5h6o8tyv"]
+[gd_scene load_steps=2 format=3 uid="uid://syov5h6o8tyv"]
+
+[ext_resource type="Script" path="res://scenes/scripts/Init.cs" id="1_y6lf4"]
 
 [node name="test_combat" type="Node3D"]
+script = ExtResource("1_y6lf4")
