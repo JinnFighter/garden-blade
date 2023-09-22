@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6nliymlqjp0v"]
+
+[ext_resource type="Script" path="res://scripts/containers/PrefabsContainer.cs" id="1_vedem"]
+[ext_resource type="PackedScene" uid="uid://brcia65r7lx1b" path="res://prefabs/player_character.tscn" id="2_gj8ki"]
+
+[node name="PrefabsContainer" type="Node"]
+script = ExtResource("1_vedem")
+PlayerCharacter = ExtResource("2_gj8ki")
