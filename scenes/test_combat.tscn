@@ -1,6 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://syov5h6o8tyv"]
+[gd_scene load_steps=7 format=3 uid="uid://syov5h6o8tyv"]
 
-[ext_resource type="Script" path="res://scenes/scripts/Init.cs" id="1_y6lf4"]
+[ext_resource type="Script" path="res://scripts/Init.cs" id="1_6w58b"]
+[ext_resource type="PackedScene" uid="uid://b6nliymlqjp0v" path="res://prefabs/prefabs_container.tscn" id="2_4s35m"]
+[ext_resource type="Script" path="res://scripts/containers/LevelDataContainer.cs" id="3_upbgb"]
 
-[node name="test_combat" type="Node3D"]
-script = ExtResource("1_y6lf4")
+[sub_resource type="BoxShape3D" id="BoxShape3D_f1pfs"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4qfct"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wfxmt"]
+material = SubResource("StandardMaterial3D_4qfct")
+size = Vector3(100, 1, 100)
+
+[node name="test_combat" type="Node3D" node_paths=PackedStringArray("_levelDataContainer", "_prefabsContainer")]
+script = ExtResource("1_6w58b")
+_levelDataContainer = NodePath("LevelDataContainer")
+_prefabsContainer = NodePath("PrefabsContainer")
+
+[node name="PrefabsContainer" parent="." instance=ExtResource("2_4s35m")]
+
+[node name="CharactersLayer" type="Node3D" parent="."]
+
+[node name="PlayerSpawnPoint" type="Node3D" parent="."]
+
+[node name="LevelDataContainer" type="Node" parent="." node_paths=PackedStringArray("PlayerSpawnPoint", "CharactersLayer")]
+script = ExtResource("3_upbgb")
+PlayerSpawnPoint = NodePath("../PlayerSpawnPoint")
+CharactersLayer = NodePath("../CharactersLayer")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.742338, 0.670025, 0, -0.670025, 0.742338, -0.181883, 3.62374, 3.65283)
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Environment"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Ground"]
+shape = SubResource("BoxShape3D_f1pfs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Ground/CollisionShape3D"]
+mesh = SubResource("BoxMesh_wfxmt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.784647, 0.619943, 0, -0.619943, 0.784647, -0.0168839, 5.30149, 8.39419)
